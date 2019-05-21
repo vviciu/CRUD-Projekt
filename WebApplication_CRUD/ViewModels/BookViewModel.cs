@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using WebApplication_CRUD.Models;
+using WebApplication_CRUD.Models.Enums;
 
 namespace WebApplication_CRUD.ViewModels
 {
@@ -12,14 +13,6 @@ namespace WebApplication_CRUD.ViewModels
         [Key]
         public int Id { get; set; }
         public Book Book { get; set; }
-        public StanUpdate StanUpdate { get; set; }
-    }
-
-    public enum StanUpdate
-    {
-        None_twit,
-        Pobranie,
-        Zmiana,
-        Wynik
+        public StateOfView StateOfView { get; set; }
     }
 }

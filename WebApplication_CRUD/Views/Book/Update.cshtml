@@ -1,5 +1,6 @@
 ﻿@using WebApplication_CRUD.ViewModels
 @model BookViewModel
+@using WebApplication_CRUD.Models.Enums
 
 @{
     ViewBag.Title = "Update";
@@ -18,7 +19,7 @@
                         <div class="col-md-10">
                             @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
                         </div>
-                        @Html.HiddenFor(x => x.StanUpdate, new { @Value = StanUpdate.Pobranie })
+                        @Html.HiddenFor(x => x.StateOfView, new { @Value = StateOfView.Get })
                     </div>
                     <div>
                         <div class="form-group">
@@ -36,7 +37,7 @@
 }
 else
 {
-    if (Model.StanUpdate == StanUpdate.Zmiana)
+    if (Model.StateOfView == StateOfView.Change)
     {
         <h2>Book presentation.....</h2>
         <div class="row">
@@ -56,7 +57,7 @@ else
                             @Html.TextBoxFor(m => m.Book.Author, new { @class = "form-control" })
                         </div>
                     </div>
-                    @Html.HiddenFor(x => x.StanUpdate, new { @Value = StanUpdate.Zmiana })
+                    @Html.HiddenFor(x => x.StateOfView, new { @Value = StateOfView.Change })
                     @Html.HiddenFor(x => x.Id, Model.Id);
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">

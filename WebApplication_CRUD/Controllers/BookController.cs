@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication_CRUD.Models;
+using WebApplication_CRUD.Models.Enums;
 using WebApplication_CRUD.ViewModels;
 
 namespace WebApplication_CRUD.Controllers
@@ -96,10 +97,10 @@ namespace WebApplication_CRUD.Controllers
         {
             using (ApplicationDbContext context = ApplicationDbContext.Create())
             {
-                if (model.StanUpdate == StanUpdate.Pobranie)
+                if (model.StateOfView == StateOfView.Get)
                 {
                     model.Book = context.Books.FirstOrDefault(x => x.Id == model.Id);
-                    model.StanUpdate = StanUpdate.Zmiana;
+                    model.StateOfView = StateOfView.Change;
                 }
                 else
                 {
@@ -107,7 +108,7 @@ namespace WebApplication_CRUD.Controllers
                     book.Author = model.Book.Author;
                     book.Title = model.Book.Title;
                     context.SaveChanges();
-                    model.StanUpdate = StanUpdate.Wynik;
+                    model.StateOfView = StateOfView.Result;
                 }
             }
 
