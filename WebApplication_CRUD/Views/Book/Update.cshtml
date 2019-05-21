@@ -1,0 +1,90 @@
+﻿@using WebApplication_CRUD.ViewModels
+@model BookViewModel
+
+@{
+    ViewBag.Title = "Update";
+}
+
+@if (Model == null)
+{
+    <h2>Delete Book with Id.....</h2>
+    <div class="row">
+        <div class="col-md-8">
+            @using (Html.BeginForm("Update", "Book", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <section id="New book">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Id, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+                        </div>
+                        @Html.HiddenFor(x => x.StanUpdate, new { @Value = StanUpdate.Pobranie })
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Get book to update" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+            <br />
+            <a href="@Url.Action("Index", "Book")" class="elements"><span>Back to menu...</span></a>
+        </div>
+    </div>
+}
+else
+{
+    if (Model.StanUpdate == StanUpdate.Zmiana)
+    {
+        <h2>Book presentation.....</h2>
+        <div class="row">
+            <section id="New book">
+                @using (Html.BeginForm("Update", "Book", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Book.Title, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Book.Title, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Book.Author, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Book.Author, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    @Html.HiddenFor(x => x.StanUpdate, new { @Value = StanUpdate.Zmiana })
+                    @Html.HiddenFor(x => x.Id, Model.Id);
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Update book....." class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+    }
+    else
+    {
+        <h2>Book update.....</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <section id="New book">
+                    <div>
+                        <textarea>Book with Id=@Model.Id updated.....</textarea>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("Index", "Book")" class="elements"><span>Back to menu...</span></a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    }
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
